@@ -128,10 +128,9 @@ jobs:
       - name: Build Release
         run: |
           chmod +x build.sh
-          ./build.sh --release --compress
-        env:
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          # ponytail: fork has no Crowdin secrets; --skip-i18n falls back
+          # to pulling upstream release's i18n.tar.gz.
+          ./build.sh --release --compress --skip-i18n
 
       - name: Move regular build
         run: |
@@ -141,10 +140,7 @@ jobs:
       - name: Build Lite Release
         run: |
           chmod +x build.sh
-          ./build.sh --release --compress --lite
-        env:
-          CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
-          CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
+          ./build.sh --release --compress --lite --skip-i18n
 
       - name: Move lite build and restore regular build
         run: |
