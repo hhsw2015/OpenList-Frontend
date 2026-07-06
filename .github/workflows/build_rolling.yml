@@ -17,7 +17,9 @@ on:
       draft:
         description: "Create draft release"
         required: false
-        default: true
+        # fork default: publish directly. Upstream keeps this true so
+        # maintainers can inspect before publishing; we don't need that.
+        default: false
         type: boolean
 
 jobs:
